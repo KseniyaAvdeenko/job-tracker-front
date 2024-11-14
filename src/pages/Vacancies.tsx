@@ -6,7 +6,7 @@ import VacancyItem from "../components/VacancyItem";
 
 const Vacancies:FC<{setIsOpenModal: Function}> = ({setIsOpenModal}) => {
     const {token} = useAppSelector(state => state.authReducer)
-    const {vacancies} = useAppSelector(state => state.vacancyReducer)
+    const {vacancies, isLoading} = useAppSelector(state => state.vacancyReducer)
     const dispatch = useAppDispatch()
 
     const deleteRespToVacancy = (id: string) => {
@@ -26,7 +26,7 @@ const Vacancies:FC<{setIsOpenModal: Function}> = ({setIsOpenModal}) => {
                     +
                 </button>
             </div>
-
+            {isLoading && 'Loading ...'}
             <table className="table-auto">
                 <thead className="text-2xl">
                 <tr className={'border-b-2 border-primary-300'}>

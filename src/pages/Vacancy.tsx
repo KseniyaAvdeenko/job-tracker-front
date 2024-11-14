@@ -10,7 +10,7 @@ import {getStatusColor} from "../utils/getStatusColor";
 const Vacancy = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
-    const {vacancy, status} = useAppSelector(state => state.vacancyReducer);
+    const {vacancy, status, isLoading} = useAppSelector(state => state.vacancyReducer);
     const {token} = useAppSelector(state => state.authReducer);
 
     useEffect(() => {
@@ -34,6 +34,7 @@ const Vacancy = () => {
                 <Link className="ml-2 font-semibold text-accent-200 hover:text-accent-100" to={'/vacancies'}>Вернутся к списку откликов</Link>
             </div>
             <h1 className="text-black text-7xl text-center text-text-200">Отклик на вакансию</h1>
+            {isLoading && 'Loading ...'}
             {vacancy && (
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm md:max-w-lg lg:max-w-4xl ">
