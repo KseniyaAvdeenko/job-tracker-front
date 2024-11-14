@@ -5,7 +5,6 @@ import {IUserBase} from "../interface/IUser";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {signup} from "../store/actions/authActions";
 import {Base64} from "js-base64";
-import {useAppSelector} from "../hooks/useAppSelector";
 import {useNavigate} from "react-router-dom";
 
 
