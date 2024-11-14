@@ -4,11 +4,10 @@ import {IUser, IUserToken} from "../../interface/IUser";
 
 const initialState: IAuthInitialState = {
     isLoading: false,
-    error: '',
     isAuth: false,
-    token: null,
+    token: localStorage.token ?? null,
     currentUser: null,
-    message: ''
+    signedUp: false
 }
 
 export const authSlice = createSlice({
@@ -22,34 +21,35 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.currentUser = action.payload;
         },
-        loadCurrentUserFail(state, action: PayloadAction<string>) {
+        loadCurrentUserFail(state) {
             state.isLoading = false;
             state.currentUser = null;
-            state.error = action.payload
         },
         loginSuccess(state, action: PayloadAction<IUserToken>) {
             state.isAuth = true;
             state.token = action.payload.token
+            localStorage.setItem('token', action.payload.token)
         },
-        loginFail(state, action: PayloadAction<string>) {
+        loginFail(state) {
             state.isAuth = false;
-            state.error = action.payload
         },
-        signUpSuccess(state, action: PayloadAction<string>) {
-            state.isAuth = false;
-            state.message = action.payload
+        loggedIn(state) {
+            state.isAuth = true;
         },
-        signUpFail(state, action: PayloadAction<string>) {
+        signUpSuccess(state) {
             state.isAuth = false;
-            state.error = action.payload
+            state.signedUp = true
         },
-        logoutSuccess(state, action: PayloadAction<string>) {
+        signUpFail(state) {
             state.isAuth = false;
-            state.message = action.payload
+            state.signedUp = false;
         },
-        logoutFail(state, action: PayloadAction<string>) {
+        logoutSuccess(state) {
             state.isAuth = false;
-            state.error = action.payload
+            localStorage.removeItem('token')
+        },
+        logoutFail(state) {
+            state.isAuth = false;
         },
     }
 })

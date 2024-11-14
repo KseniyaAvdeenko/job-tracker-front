@@ -5,7 +5,7 @@ export interface IUserBase {
 }
 
 export interface IUser extends IUserBase{
-    _id: number|string;
+    _id: string;
 }
 
 

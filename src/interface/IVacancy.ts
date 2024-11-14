@@ -8,11 +8,11 @@ export interface IVacancyBase {
 }
 
 export interface IVacancy extends IVacancyBase {
-    _id: number|string
+    _id: string
 }
 
 export interface IVacancyStatus {
-    _id: number|string
+    _id: string
     status: Status;
     name: StatusName;
     color: string;
