@@ -10,8 +10,10 @@ const Header = () => {
     const dispatch = useAppDispatch()
 
     function logout() {
-        if (token) dispatch(logoutUser(token))
-        navigate('/')
+        if (token) {
+            dispatch(logoutUser(token))
+            navigate('/')
+        }
     }
 
 

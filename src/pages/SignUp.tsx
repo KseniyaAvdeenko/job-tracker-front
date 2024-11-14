@@ -21,7 +21,7 @@ const SignUp = () => {
         user.password = Base64.encode(user.password)
         dispatch(signup(user))
         setNewUser({username: '', password:'', email: ''})
-        if(signedUp) navigate('/login')
+        navigate('/login')
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
