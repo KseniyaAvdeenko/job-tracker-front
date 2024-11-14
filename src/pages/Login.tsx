@@ -24,7 +24,7 @@ const Login = () => {
     const changeHandler=(e: React.ChangeEvent<HTMLInputElement>)=>setUser({...user,[e.target.name]:e.target.value})
 
 
-    useEffect(()=>{if(isAuth) window.location.replace('/vacancies')},[isAuth])
+    if(isAuth) window.location.replace('/vacancies')
 
     return (
         <main className={'w-full p-32'}>

@@ -12,7 +12,7 @@ const Header = () => {
     function logout() {
         if (token) dispatch(logoutUser(token))
     }
-    useEffect(()=>{if(!isAuth) window.location.replace('/')},[isAuth])
+   if(!isAuth) window.location.replace('/')
 
 
     return (

@@ -25,7 +25,7 @@ const SignUp = () => {
         setNewUser({...newUser, [e.target.name]: e.target.value})
     }
 
-    useEffect(()=>{if(signedUp) window.location.replace('/login')},[signedUp])
+    if(signedUp) window.location.replace('/login')
 
 
     return (
