@@ -34,6 +34,7 @@ const Login = () => {
                   additionalInfo={{text: 'Еще нет аккаунта?', linkName: 'Создать аккаунт', linkPath: '/signup'}}
             >
                 <InputContainer
+                    isTextArea={false}
                     value={user.email}
                     id={'email'}
                     label={'Email'}
@@ -42,6 +43,7 @@ const Login = () => {
                     required={true}
                 />
                 <InputContainer
+                    isTextArea={false}
                     value={user.password}
                     id={'password'}
                     label={'Пароль'}

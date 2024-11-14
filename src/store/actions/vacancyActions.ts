@@ -11,6 +11,7 @@ export const loadVacancyStatus = () => async (dispatch: AppDispatch) => {
         const response = await axios.get(process.env.REACT_APP_API_URL + '/status/', getRequestHeaders())
         dispatch(vacancySlice.actions.loadStatusSuccess(response.data))
     } catch {
+        dispatch(vacancySlice.actions.loadStatusFail())
         dispatch((notificationSlice.actions.setError('Ошибка загрузки статуса вакансии')))
     }
 }
@@ -22,7 +23,23 @@ export const loadVacancies = (token: string) => async (dispatch: AppDispatch) =>
             const response = await axios.get(process.env.REACT_APP_API_URL + '/vacancies/', getAuthConfigApplicationJson(token))
             dispatch(vacancySlice.actions.loadVacanciesSuccess(response.data))
         } catch {
+            dispatch(vacancySlice.actions.loadVacanciesFail())
             dispatch((notificationSlice.actions.setError('Ошибка загрузки вакансий')))
+        }
+    } else {
+        dispatch((notificationSlice.actions.setError('Вы не авторизованы')))
+    }
+}
+
+export const loadVacancy = (token: string, id: string) => async (dispatch: AppDispatch) => {
+    if (token) {
+        try {
+            dispatch(vacancySlice.actions.fetchingVacancy())
+            const response = await axios.get(process.env.REACT_APP_API_URL + '/vacancies/' + id, getAuthConfigApplicationJson(token))
+            dispatch(vacancySlice.actions.loadVacancySuccess(response.data))
+        } catch {
+            dispatch(vacancySlice.actions.loadVacancyFail())
+            dispatch((notificationSlice.actions.setError('Ошибка загрузки вакансии')))
         }
     } else {
         dispatch((notificationSlice.actions.setError('Вы не авторизованы')))
@@ -37,16 +54,17 @@ export const createVacancy = (token: string, vacancy: IVacancyBase) => async (di
             dispatch((notificationSlice.actions.setSuccessMessage('Вакансия создана успешно')))
             dispatch(loadVacancies(token))
         } catch {
+            dispatch(vacancySlice.actions.createVacancyFail())
             dispatch((notificationSlice.actions.setError('Ошибка создания вакансии')))
         }
     } else {
         dispatch(notificationSlice.actions.setError('Вы не авторизованы'))
     }
 }
-export const updateVacancy = (token: string, id:  string, data: any) => async (dispatch: AppDispatch) => {
+export const updateVacancy = (token: string, id: string, data: any) => async (dispatch: AppDispatch) => {
     if (token) {
         try {
-            const response = await axios.put(process.env.REACT_APP_API_URL + '/vacancies/' + id, getAuthConfigApplicationJson(token))
+            const response = await axios.put(process.env.REACT_APP_API_URL + '/vacancies/' + id, JSON.stringify(data), getAuthConfigApplicationJson(token))
             dispatch(vacancySlice.actions.updateVacancySuccess(response.data))
             dispatch((notificationSlice.actions.setSuccessMessage('Вакансия обновлена успешно')))
             dispatch(loadVacancies(token))

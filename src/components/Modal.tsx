@@ -43,21 +43,21 @@ const Modal: FC<IModalProps> = ({isOpen, setIsOpen, currentUser, token}) => {
     }
 
     return (
-        <div className="w-full h-screen absolute top-0 left-0 flex justify-center items-center z-10"
+        <div className="w-full h-screen absolute top-0 left-0 flex justify-center items-center backdrop-blur-sm z-10"
              onClick={() => setIsOpen(false)}
              style={{display: isOpen ? "flex" : 'none'}}
         >
-            <div className="p-10 border border-bg-300  rounded-lg backdrop-blur-sm" onClick={e => e.stopPropagation()}>
+            <div className="p-10 border border-bg-300  rounded-lg bg-bg-200" onClick={e => e.stopPropagation()}>
                 <Form submitHandler={submitHandler} buttonName={'Создать'}
                       formName={'Создание нового отклика на вакансию'}>
                     <InputContainer id={'company'} label={'Компания'} name={'company'} type={'text'}
-                                    changeHandler={changeHandler}
+                                    changeHandler={changeHandler} isTextArea={false}
                                     required={true} value={newVacancy.company}/>
                     <InputContainer id={'vacancy'} label={'Вакансия'} name={'vacancy'} type={'text'}
-                                    changeHandler={changeHandler}
+                                    changeHandler={changeHandler} isTextArea={true}
                                     required={true} value={newVacancy.vacancy}/>
                     <InputContainer id={'salary'} label={'Зарплатная вилка'} name={'salary'} type={'text'}
-                                    changeHandler={changeHandler}
+                                    changeHandler={changeHandler} isTextArea={false}
                                     required={false} value={newVacancy.salary}/>
                     <Select id={'status'} required={true}
                             label={'Статус отклика'}
@@ -68,7 +68,7 @@ const Modal: FC<IModalProps> = ({isOpen, setIsOpen, currentUser, token}) => {
                                 background: getStatusColor(newVacancy.status, status ? status : []),
                             }}/>
                     <InputContainer id={'note'} label={'Заметка'} name={'note'} type={'text'}
-                                    changeHandler={changeHandler}
+                                    changeHandler={changeHandler} isTextArea={true}
                                     required={false} value={newVacancy.note}/>
                 </Form>
             </div>

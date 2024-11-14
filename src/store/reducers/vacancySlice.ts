@@ -36,6 +36,17 @@ export const vacancySlice = createSlice({
             state.isLoading = false;
             state.vacancies = null;
         },
+        fetchingVacancy(state) {
+            state.isLoading = true
+        },
+        loadVacancySuccess(state, action: PayloadAction<IVacancy>) {
+            state.isLoading = false;
+            state.vacancy = action.payload;
+        },
+        loadVacancyFail(state) {
+            state.isLoading = false;
+            state.vacancy = null;
+        },
         createVacancySuccess(state, action: PayloadAction<IVacancy>) {
             state.vacancy = action.payload;
         },
