@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useAppSelector} from "../hooks/useAppSelector";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {logoutUser} from "../store/actions/authActions";
@@ -12,8 +12,8 @@ const Header = () => {
     function logout() {
         if (token) dispatch(logoutUser(token))
     }
+    useEffect(()=>{if(!isAuth) window.location.replace('/')},[isAuth])
 
-    if (!isAuth) navigate('/')
 
     return (
         <header className="flex px-32 w-full">
