@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import InputContainer from "../components/UI/InputContainer";
 import Form from "../components/UI/Form";
 import {IUserBase} from "../interface/IUser";
@@ -6,10 +6,11 @@ import {useAppDispatch} from "../hooks/useAppDispatch";
 import {signup} from "../store/actions/authActions";
 import {Base64} from "js-base64";
 import {useAppSelector} from "../hooks/useAppSelector";
-import {redirect} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const {signedUp} = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch()
     const [newUser, setNewUser] = useState<IUserBase>({username: '', password:'', email: ''})
@@ -20,7 +21,7 @@ const SignUp = () => {
         user.password = Base64.encode(user.password)
         dispatch(signup(user))
         setNewUser({username: '', password:'', email: ''})
-        redirect('/login')
+        if(signedUp) navigate('/login')
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Form from "../components/UI/Form";
 import InputContainer from "../components/UI/InputContainer";
 import {Base64} from "js-base64";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {loginUser} from "../store/actions/authActions";
 import {useAppSelector} from "../hooks/useAppSelector";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {IUserBase} from "../interface/IUser";
 
 const Login = () => {
     const navigate = useNavigate();
-    const {isAuth} = useAppSelector(state => state.authReducer);
+    const {isAuth, token} = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch()
     const [user, setUser] = useState<{email:string; password: string}>({email: '', password: ''})
     function submitHandler(e: React.FormEvent<HTMLFormElement>) {
@@ -19,11 +19,11 @@ const Login = () => {
         User.password = Base64.encode(user.password)
         dispatch(loginUser(User))
         setUser({email: '', password: ''})
-        if(isAuth) redirect('/vacancies')
     }
 
     const changeHandler=(e: React.ChangeEvent<HTMLInputElement>)=>setUser({...user,[e.target.name]:e.target.value})
 
+    if(isAuth)navigate('/vacancies')
 
     return (
         <main className={'w-full p-32'}>

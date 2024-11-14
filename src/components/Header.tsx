@@ -1,16 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useAppSelector} from "../hooks/useAppSelector";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {logoutUser} from "../store/actions/authActions";
-import {Link, redirect} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate()
     const {isAuth, token, currentUser} = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch()
 
     function logout() {
         if (token) dispatch(logoutUser(token))
-        if(!isAuth) redirect('/')
+        navigate('/')
     }
 
 
