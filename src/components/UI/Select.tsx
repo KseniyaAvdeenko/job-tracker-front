@@ -1,6 +1,4 @@
 import React, {FC} from 'react';
-import {IVacancyStatus} from "../../interface/IVacancy";
-import {getStatusColor} from "../../utils/getStatusColor";
 
 interface ISelectProps {
     id: string;

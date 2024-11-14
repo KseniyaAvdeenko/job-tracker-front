@@ -31,7 +31,7 @@ function App() {
             dispatch(loadCurrentUser(token))
             dispatch(loadVacancies(token))
         }
-    }, [token])
+    }, [token, dispatch])
 
     useEffect(() => {
         if (error) setErrors([...errors, error])
@@ -46,7 +46,7 @@ function App() {
         if (successMessages.length) setTimeout(() => {
             setSuccessMessages([])
         }, 9000)
-    }, [errors.length, successMessages.length]);
+    }, [errors.length, successMessages.length, dispatch]);
 
     return (
         <BrowserRouter>

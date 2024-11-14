@@ -1,10 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {useAppSelector} from "../hooks/useAppSelector";
-import {Link} from "react-router-dom";
-import VacancyItem from "../components/VacancyItem";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {deleteVacancy} from "../store/actions/vacancyActions";
-import Modal from "../components/Modal";
+import VacancyItem from "../components/VacancyItem";
 
 const Vacancies:FC<{setIsOpenModal: Function}> = ({setIsOpenModal}) => {
     const {token} = useAppSelector(state => state.authReducer)

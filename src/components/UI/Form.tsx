@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import InputContainer from "./InputContainer";
 import {Link} from "react-router-dom";
 
 interface IFormProps {

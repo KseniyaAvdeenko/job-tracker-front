@@ -1,22 +1,11 @@
 import React, {FC} from 'react';
-import {IVacancy} from "../interface/IVacancy";
-import {Link} from "react-router-dom";
 import {useAppSelector} from "../hooks/useAppSelector";
 import {getStatusColor} from "../utils/getStatusColor";
-import InputContainer from "./UI/InputContainer";
+import {Link} from "react-router-dom";
+import {IVacancy} from "../interface/IVacancy";
 
-interface IVacancyItemProps {
-    vacancy: IVacancy;
-    deleteRespToVacancy: Function
-}
-
-const VacancyItem: FC<IVacancyItemProps> = ({vacancy, deleteRespToVacancy}) => {
-    const {status} = useAppSelector(state => state.vacancyReducer)
-
-
-    function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-
-    }
+const VacancyItem:FC<{vacancy: IVacancy; deleteRespToVacancy:Function}> = ({vacancy, deleteRespToVacancy}) => {
+     const {status} = useAppSelector(state => state.vacancyReducer)
 
     return (
         <tr className="text-bg-200 text-2xl border-b border-primary-300" style={{

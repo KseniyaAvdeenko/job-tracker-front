@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Form from "../components/UI/Form";
 import InputContainer from "../components/UI/InputContainer";
 import {Base64} from "js-base64";
@@ -23,7 +23,7 @@ const Login = () => {
 
     const changeHandler=(e: React.ChangeEvent<HTMLInputElement>)=>setUser({...user,[e.target.name]:e.target.value})
 
-    useEffect(()=>{if(isAuth) navigate('/vacancies')},[isAuth])
+    if(isAuth) navigate('/vacancies')
 
 
     return (

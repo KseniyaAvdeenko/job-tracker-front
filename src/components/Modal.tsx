@@ -33,6 +33,14 @@ const Modal: FC<IModalProps> = ({isOpen, setIsOpen, currentUser, token}) => {
         e.preventDefault();
         dispatch(createVacancy(token, newVacancy))
         setIsOpen(false)
+        setNewVacancy({
+            company: '',
+            vacancy: '',
+            status: 'Не просмотрено',
+            salary: '',
+            note: '',
+            userId: currentUser._id
+        })
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
