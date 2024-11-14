@@ -6,6 +6,7 @@ import {useAppDispatch} from "../hooks/useAppDispatch";
 import {signup} from "../store/actions/authActions";
 import {Base64} from "js-base64";
 import {useAppSelector} from "../hooks/useAppSelector";
+import {redirect} from "react-router-dom";
 
 
 const SignUp = () => {
@@ -19,13 +20,13 @@ const SignUp = () => {
         user.password = Base64.encode(user.password)
         dispatch(signup(user))
         setNewUser({username: '', password:'', email: ''})
+        redirect('/login')
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewUser({...newUser, [e.target.name]: e.target.value})
     }
 
-    if(signedUp) window.location.replace('/login')
 
 
     return (

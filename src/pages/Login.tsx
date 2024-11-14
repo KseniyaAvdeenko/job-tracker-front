@@ -5,7 +5,7 @@ import {Base64} from "js-base64";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import {loginUser} from "../store/actions/authActions";
 import {useAppSelector} from "../hooks/useAppSelector";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import {IUserBase} from "../interface/IUser";
 
 const Login = () => {
@@ -19,12 +19,11 @@ const Login = () => {
         User.password = Base64.encode(user.password)
         dispatch(loginUser(User))
         setUser({email: '', password: ''})
+        if(isAuth) redirect('/vacancies')
     }
 
     const changeHandler=(e: React.ChangeEvent<HTMLInputElement>)=>setUser({...user,[e.target.name]:e.target.value})
 
-
-    if(isAuth) window.location.replace('/vacancies')
 
     return (
         <main className={'w-full p-32'}>
