@@ -11,7 +11,6 @@ import {useNavigate} from "react-router-dom";
 
 const SignUp = () => {
     const navigate = useNavigate()
-    const {signedUp} = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch()
     const [newUser, setNewUser] = useState<IUserBase>({username: '', password:'', email: ''})
 

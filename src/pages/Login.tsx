@@ -10,7 +10,7 @@ import {IUserBase} from "../interface/IUser";
 
 const Login = () => {
     const navigate = useNavigate();
-    const {isAuth, token} = useAppSelector(state => state.authReducer);
+    const {isAuth} = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch()
     const [user, setUser] = useState<{email:string; password: string}>({email: '', password: ''})
     function submitHandler(e: React.FormEvent<HTMLFormElement>) {
